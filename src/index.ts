@@ -1,19 +1,23 @@
-import { connect, disconnect} from './db';
+import { Database} from './db';
+
+let dbInstance: Database | null= null
+async function setupConnectionToDb() {
+    const dbInstance = Database.getInstance();
+    const db = await dbInstance.connect();
+}
+
+setupConnectionToDb()
 
 process.on('uncaughtException', async (error) => {
     console.error('Uncaught exception', error);
-    await disconnect();
+    await dbInstance!.disconnect();
     process.exit(1);
 });
 
 process.on('unhandledRejection', async (reason, promise) => {
     console.error('Unhandled rejection at ', promise, 'reason: ', reason);
-    await disconnect();
+    await dbInstance!.disconnect();
     process.exit(1);
 });
 
-async function setupConnectionToDb() {
-    await connect();
-}
-
-setupConnectionToDb();
+;
