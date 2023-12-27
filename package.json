@@ -4,11 +4,18 @@
   "description": "Dive Deep MongoDb",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts"
   },
   "author": "Hung Viet Hoang",
   "license": "ISC",
   "devDependencies": {
+    "@types/mongodb": "^4.0.7",
+    "@types/node": "^20.10.5",
+    "nodemon": "^3.0.2",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "mongodb": "^6.3.0"
   }
 }
