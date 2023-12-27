@@ -1,0 +1,15 @@
+# docker-compose.yml
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    env_file:
+      - .env
+  db:
+    image: mongo:latest
+    ports:
+      - "27017:27017"

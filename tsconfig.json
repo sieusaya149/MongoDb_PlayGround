@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "outDir": "./dist",  // Output directory for compiled JavaScript
+    "rootDir": "./src",  // Source directory
+    "strict": true
+  },
+  "include": [
+    "./src/**/*.ts",
+    "src/index.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

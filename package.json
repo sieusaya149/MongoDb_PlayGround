@@ -1,0 +1,14 @@
+{
+  "name": "mongodb_dive_deep",
+  "version": "1.0.0",
+  "description": "Dive Deep MongoDb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hung Viet Hoang",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}
