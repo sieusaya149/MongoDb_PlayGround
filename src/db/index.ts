@@ -10,7 +10,7 @@ export class Database {
     private uri: string;
     private dbName: string;
     private constructor() {
-        this.uri = process.env.MONGO_URI || 'mongodb://localhost:27017';
+        this.uri = process.env.MONGO_URI || 'mongodb://localhost:27021';
         this.dbName = process.env.MONGO_DB || 'test';
     }
 

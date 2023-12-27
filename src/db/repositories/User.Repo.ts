@@ -1,8 +1,10 @@
 import { Db, Collection, InsertOneResult,
         InsertManyResult, ObjectId} from 'mongodb';
 import { Database } from "../index";
-import {createUserCollection,
+import {UserSchema,
         UserCollection} from "../models/User.schema";
+import { createCollection } from '../../helper/createCollection';
+import { BaseRepo } from './Base.Repo';
 interface IUser {
     _id?: ObjectId;
     username: string;
@@ -38,57 +40,20 @@ export class User implements IUser{
 }
 
 
-export class UserRepo {
-    private static instance: UserRepo
-    private userCollection!: Collection
-    private db: Db | undefined = Database.getInstance().getDb()
+export class UserRepo extends BaseRepo<User> {
+    private static instance: UserRepo;
     private constructor() {
-        createUserCollection(this.db)
+        super()
+        createCollection(this.db, UserCollection, UserSchema)
     }
     public static getInstance(): UserRepo
     {
         if(!UserRepo.instance)
         {
             UserRepo.instance = new UserRepo()
-            UserRepo.instance.setUserCollection(UserCollection)
+            UserRepo.instance.setCollection(UserCollection)
         }
         return UserRepo.instance
-    }
-
-    private setUserCollection(collectionName: string): Collection | null
-    {
-        if(!this.db)
-        {
-            console.log("db is not connected")
-            return null
-        }
-        return this.userCollection = this.db.collection(collectionName)
-    }
-
-    public async create(user: object): Promise<InsertOneResult<any>> {
-        const result = await this.userCollection.insertOne(user);
-        return result;
-    }
-
-    public async find(query: Object): Promise<Array<any>> {
-        const result = await this.userCollection.find(query).toArray();
-        return result;
-    }
-    
-    public async update(id: string, user: Object): Promise<any> {
-        const result = await this.userCollection.updateOne({ _id: new ObjectId(id) }, user);
-        console.log(result)
-        return result
-    }
-    
-    public async delete(id: string): Promise<any> {
-        const result = await this.userCollection.deleteOne({ _id: new ObjectId(id) });
-        return result
-    }
-
-    public async insertMany(users: Array<any>): Promise<InsertManyResult<any>> {
-        const result = this.userCollection.insertMany(users);
-        return result;
     }
     
 }

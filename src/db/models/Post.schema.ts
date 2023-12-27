@@ -1,29 +1,24 @@
 import { Db } from "mongodb";
-export const UserCollection = "users";
-export const UserSchema = {
+import { ObjectId } from "mongodb";
+
+export const PostCollection = "posts";
+
+export const PostSchema = {
     $jsonSchema: {
         bsonType: "object",
-        required: ["username", "password", "email", "firstName", "lastName"],
+        required: ["title", "content", "authorId", "createdAt", "updatedAt"],
         properties: {
-            username: {
+            title: {
                 bsonType: "string",
                 description: "must be a string and is required"
             },
-            password: {
+            content: {
                 bsonType: "string",
                 description: "must be a string and is required"
             },
-            email: {
-                bsonType: "string",
-                description: "must be a string and is required"
-            },
-            firstName: {
-                bsonType: "string",
-                description: "must be a string and is required"
-            },
-            lastName: {
-                bsonType: "string",
-                description: "must be a string and is required"
+            authorId: {
+                bsonType: "objectId",
+                description: "must be an objectId and is required"
             },
             createdAt: {
                 bsonType: "date",
@@ -36,7 +31,3 @@ export const UserSchema = {
         }
     }
 };
-
-
-
-
