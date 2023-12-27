@@ -19,7 +19,23 @@ const EXAMPLE_USER =
         email: 'test2@test2.com',
         firstName: 'Jone',
         lastName: 'Kate' 
-},
+    },
+
+    user3: {
+        username: 'test3',
+        password: 'test3',
+        email: 'test3@test3.com',
+        firstName: 'AD',
+        lastName: 'Jones' 
+    },
+
+    user4: {
+        username: 'test4',
+        password: 'test4',
+        email: 'test4@test4.com',
+        firstName: 'Sion',
+        lastName: 'Mhan' 
+    },
 
 }
 describe('UserRepo', () => {
@@ -90,6 +106,17 @@ describe('UserRepo', () => {
         });
     });
     
+
+    describe('insertMany', () => {
+        it('should insert multiple users into the database', async () => {
+            const users = [
+                EXAMPLE_USER.user3,
+                EXAMPLE_USER.user4,
+            ];
+            const result = await userRepo.insertMany(users);
+            expect(result.insertedCount).to.equal(users.length);
+        });
+    });
     
 
     

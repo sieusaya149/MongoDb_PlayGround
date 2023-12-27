@@ -1,4 +1,5 @@
-import { Db, Collection, InsertOneResult, ObjectId} from 'mongodb';
+import { Db, Collection, InsertOneResult,
+        InsertManyResult, ObjectId} from 'mongodb';
 import { Database } from "../index";
 import {createUserCollection,
         UserCollection} from "../models/User.schema";
@@ -83,6 +84,11 @@ export class UserRepo {
     public async delete(id: string): Promise<any> {
         const result = await this.userCollection.deleteOne({ _id: new ObjectId(id) });
         return result
+    }
+
+    public async insertMany(users: Array<any>): Promise<InsertManyResult<any>> {
+        const result = this.userCollection.insertMany(users);
+        return result;
     }
     
 }
